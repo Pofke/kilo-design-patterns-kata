@@ -29,16 +29,20 @@ class DemoRun
 
     public function kata3()
     {
+        $discountStrategy = new DiscountStrategy();
 
         if ($this->isTuesday()) {
-            return (new DiscountStrategy(new FreeShippingCalculator()))->calculate(100, 20, 8);
+            $discountStrategy->setStrategy(new FreeShippingCalculator());
+        } else {
+            $discountStrategy->setStrategy(new PriceCalculator());
         }
-        return (new DiscountStrategy(new PriceCalculator()))->calculate(100, 20, 8);
+
+        return $discountStrategy->calculate(100, 20, 8);
     }
 
     public function kata4(): float
     {
-        return (new DpdShippingProvider(new Discount(20, new Price(100))))->cost();
+        return (new Shipping((new DpdShippingProvider())->ourCost(), new Discount(20, new Price(100))))->cost();
     }
 
     /**
