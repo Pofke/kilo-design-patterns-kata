@@ -6,7 +6,7 @@ namespace App\Kata1;
 
 class Price implements CostInterface
 {
-    public function __construct(private float $value)
+    public function __construct(private readonly float $value)
     {
     }
 

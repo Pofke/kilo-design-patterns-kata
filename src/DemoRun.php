@@ -17,7 +17,7 @@ class DemoRun
 {
     private bool $isTuesday = false;
 
-    public function kata1()
+    public function kata1(): float
     {
         return (new Shipping(8, new Discount(20, new Price(100))))->cost();
     }
@@ -36,7 +36,7 @@ class DemoRun
         return (new DiscountStrategy(new PriceCalculator()))->calculate(100, 20, 8);
     }
 
-    public function kata4()
+    public function kata4(): float
     {
         return (new DpdShippingProvider(new Discount(20, new Price(100))))->cost();
     }
