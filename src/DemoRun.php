@@ -12,6 +12,7 @@ use App\Kata2\PriceCalculator;
 use App\Kata2\PriceCalculatorInterface;
 use App\Kata3\DiscountStrategy;
 use App\Kata4\DpdShippingProvider;
+use App\Kata4\DpdShippingAdapter;
 
 class DemoRun
 {
@@ -42,7 +43,8 @@ class DemoRun
 
     public function kata4(): float
     {
-        return (new Shipping((new DpdShippingProvider())->ourCost(), new Discount(20, new Price(100))))->cost();
+        $dpd = new DpdShippingProvider();
+        return (new DpdShippingAdapter($dpd, new Discount(20, new Price(100))))->cost();
     }
 
     /**
